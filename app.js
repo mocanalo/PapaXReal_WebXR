@@ -68,7 +68,12 @@ loader.load(
         // Intentar iniciar MediaPipe
         initializeFaceTracking();
     },
-    undefined,
+    (xhr) => {
+        if (xhr.lengthComputable) {
+            const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
+            statusDiv.textContent = `Descargando modelo: ${percent}%`;
+        }
+    },
     (error) => {
         console.error(error);
         statusDiv.textContent = "Error 404: No encuentro el archivo .glb";

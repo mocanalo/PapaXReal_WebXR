@@ -46,6 +46,16 @@
 <body>
     <div id="status">Iniciando sistema...</div>
     <div id="container"></div>
+    <script>
+        window.onerror = function (msg, url, line, col, error) {
+            document.getElementById('status').textContent = "ERROR: " + msg;
+            // Also alert for good measure on mobile
+            // alert("Error: " + msg); 
+        };
+        window.addEventListener('unhandledrejection', function (event) {
+            document.getElementById('status').textContent = "PROMISE ERROR: " + event.reason;
+        });
+    </script>
     <script type="module" src="app.js"></script>
 </body>
 
